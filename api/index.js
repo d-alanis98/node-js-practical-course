@@ -1,22 +1,20 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
-const swaggerUi = require('swagger-ui-express');
 //Configuration
 const { api } = require('../config.js');
-const user = require('./components/user/network');
-
+//Routes
+const routes = require('../network/routes');
+//Error handler
+const errors = require('../network/errors');
+//We create an express instance
 const app = express();
-
+//We apply middlewares
 app.use(bodyParser.json());
-
-const swaggerDocumentation = require('./swagger.json');
-
-//Router
-app.use('/api/user', user);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocumentation));
-
+//We provide the express instance to the router
+routes(app);
+//We apply the error handler middleware (must be the last middleware applied)
+app.use(errors);
+//We listen in the specified port in configuration
 app.listen(api.port, () => {
     console.log(`Api listening on port ${api.port}`);
 });
