@@ -73,16 +73,15 @@ module.exports = (injectedStore) => {
         
         if(!userFrom || !userTo)
             return response.error(req, res, 'All fields are required', 400);
-        try {
-            let relationship = await store.insert(FOLLOW_TABLE, {
-                user_from: userFrom,
-                user_to: userTo
-            });
-            return response.success(req, res, relationship, 201);
-        }
-        catch(error) {
-            next();
-        }
+        
+        store.insert(FOLLOW_TABLE, {
+            user_from: userFrom,
+            user_to: userTo
+        })
+            .then(data => {
+                return response.success(req, res, data, 200)
+            })
+            .catch(next);
         
     }
 

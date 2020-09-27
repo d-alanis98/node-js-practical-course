@@ -10,7 +10,8 @@ exports.success = (
     message = DEFAULT_SUCCESS_MESSAGE, 
     status = DEFAULT_SUCCESS_CODE
 ) => {
-    res.status(status)
+    console.log({ message: message, status: status })
+    return res.status(status)
         .send(message);
 }
 
@@ -20,6 +21,6 @@ exports.error = (
     message = DEFAULT_ERROR_MESSAGE, 
     status = DEFAULT_ERROR_CODE
 ) => {
-    res.status(status)
+    return res.status(status)
         .send(message);
 }

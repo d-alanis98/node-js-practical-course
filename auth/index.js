@@ -15,9 +15,9 @@ const check = {
         if(!decoded || decoded.id !== owner)
             throw error('User without permission', 401);
     },
-    logged: (req) => (
-        decodeHeader(req)
-    )
+    logged: (req) => {
+        decodeHeader(req);
+    }
 }
 
 const getToken = authorization => {

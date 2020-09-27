@@ -14,6 +14,7 @@ const checkPermissions = action => {
             case FOLLOW:
                 auth.check.logged(req);
                 next();
+                break;
             default:
                 next();
         }

@@ -1,8 +1,7 @@
-const { Router } = require('express');
 const express = require('express');
 //Configuration
 const { 
-    constants: { UPDATE }
+    constants: { UPDATE, FOLLOW }
 } = require('../../../config');
 //Controller
 const { getUser, getUsers, addUser, updateUser, followUser } = require('./index');
@@ -17,8 +16,7 @@ router.get('/', getUsers);
 router.post('/', addUser);
 router.put('/', secure(UPDATE), updateUser);
 router.get('/:userId', getUser);
-//router.get('/follow')
-router.post('/follow/:userTo', followUser);
+router.post('/follow/:id', secure(FOLLOW), followUser);
 
 
 

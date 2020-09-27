@@ -34,9 +34,10 @@ handleConnection();
 
 const executeQuery = (query, data = null) => new Promise((resolve, reject) => {
     connection.query(query, data, (error, data) => {
+        console.log(data)
         if(error)
             return reject(error)
-        resolve(data);
+        else resolve(data);
     });
 });
 
